@@ -1,0 +1,43 @@
+{%extends 'layout.html'%}
+{%block content%}
+<div class="row">
+{% for content in contents %}
+<div class="panel panel-primary">
+    <div class="panel-heading" style="text-align: center">{{content.title}}</div>
+    <div class="panel-body">
+        <p style="text-align: center">
+            作者：<span>{{content.user.username}}</span> -
+            时间：<span>{{content.addTime|date('Y年m月d日 H:i:s',-8*60)}}</span> -
+            阅读：<span>{{content.views}}</span> -
+            评论：<span>10</span>
+        </p>
+        <p>{{content.desription}}</p>
+        <p style="text-align: right"><a href="/view?contentid={{content.id}}">阅读全文</a></p>
+    </div>
+</div>
+{%endfor%}
+</div>
+<div class="row">
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous">
+                {%if page <= 1%}
+                <a href="javascript:;">没有上一页了</a>
+                {%else%}
+                <a href="/?category={{category}}&page={{page-1}}">上一页</a>
+                {%endif%}
+            </li>
+            {%if pages>0%}
+            <li><strong>{{page}} / {{pages}}</strong></li>
+            {%endif%}
+            <li class="next">
+                {%if page >= pages%}
+                <a href="javascript:;">没有下一页了</a>
+                {%else%}
+                <a href="/?category={{category}}&page={{page+1}}">下一页</a>
+                {%endif%}
+            </li>
+        </ul>
+    </nav>
+</div>
+{%endblock%}
